@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous (name="Team4008AutoEncoderBased", group="4008")
-public class Team4008AutoEncoderBased extends LinearOpMode {
+public class Team6976AutoEncoderBased extends LinearOpMode {
 
-    Team4008HM2025 robot = new Team4008HM2025();
+    Team6976HM2025 robot = new Team6976HM2025();
     ElapsedTime Time = new ElapsedTime();
 
 

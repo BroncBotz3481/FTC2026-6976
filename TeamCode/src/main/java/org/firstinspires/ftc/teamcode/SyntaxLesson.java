@@ -1,13 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
 public class SyntaxLesson extends LinearOpMode {
-    Team4008HM2025 robot = new Team4008HM2025();
+    Team6976HM2025 robot = new Team6976HM2025();
 
     @Override
     public void runOpMode() {
