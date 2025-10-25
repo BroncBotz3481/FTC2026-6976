@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 //AUSTIN: YOUR DEADLINE FOR THIS IS BEFORE KICKOFF
 //WE NEED YOUR CODE FOR KICKOFF DEMONSTRATION! HELP!
-@TeleOp(name = "Team4008TeleOp2025", group = "4008")
+@TeleOp(name = "Team6976TeleOp2026", group = "6976")
 public class Team6976TeleOp2025 extends LinearOpMode {
     Team6976HM2025 robot = new Team6976HM2025();
 

@@ -41,7 +41,7 @@ public Servo Meowcat2 = null;
         DriveLeftBack.setDirection(DcMotor.Direction.FORWARD);
         DriveLeftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         DriveLeftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        DriveLeftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        DriveLeftBack.  setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         DriveRightBack.setDirection(DcMotor.Direction.REVERSE);
         DriveRightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
