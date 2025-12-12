@@ -4,8 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-//AUSTIN: YOUR DEADLINE FOR THIS IS BEFORE KICKOFF
-//WE NEED YOUR CODE FOR KICKOFF DEMONSTRATION! HELP!
+
 @TeleOp(name = "Team6976TeleOp2026", group = "6976")
 public class Team6976TeleOp2025 extends LinearOpMode {
     Team6976HM2025 robot = new Team6976HM2025();
@@ -49,9 +48,9 @@ public class Team6976TeleOp2025 extends LinearOpMode {
             double backRightPower = (y + x - rx) / denominator;
 
             //AUSTIN: EXPLAIN HOW THE POWER WILL BE AFFECTED BY speedslow WITH mag
-            robot.DriveLeftFront.setPower(frontLeftPower * mag);
+            robot.DriveLeftFront.setPower(-frontLeftPower * mag);
             robot.DriveLeftBack.setPower(backLeftPower * mag);
-            robot.DriveRightFront.setPower(frontRightPower * mag);
+            robot.DriveRightFront.setPower(-frontRightPower * mag);
             robot.DriveRightBack.setPower(backRightPower * mag);
 
             telemetry.addData("RightFront", robot.DriveRightFront.getCurrentPosition());
@@ -69,6 +68,19 @@ public class Team6976TeleOp2025 extends LinearOpMode {
             } else if (gamepad1.dpad_right){
                 moveRight(mag);
             }
+            while (gamepad2.right_trigger > 0.3){
+    robot.intake.setPower(-.5);
+            }
+            while (gamepad2.left_trigger > 0.3){
+                robot.intake.setPower(.5);
+            }
+            while (gamepad2.y){
+                robot.Shooter.setPower(-.5);
+            }
+            robot.Shooter.setPower(0);
+            while (gamepad2.a){
+                robot.Shooter.setPower(.5);
+            }
 
 
             //write your code here
@@ -78,22 +90,22 @@ public class Team6976TeleOp2025 extends LinearOpMode {
     //Methods go here
     public void moveLeft (double power){
 
-        robot.DriveLeftFront.setPower(power); robot.DriveRightFront.setPower(-power);
+        robot.DriveLeftFront.setPower(power); robot.DriveRightFront.setPower(power);
         robot.DriveLeftBack.setPower(-power);   robot.DriveRightBack.setPower(power);
     }
     public void moveRight (double power){
         // Left Wheels                         //Right Wheels
-        robot.DriveLeftFront.setPower(-power); robot.DriveRightFront.setPower(power);
+        robot.DriveLeftFront.setPower(power); robot.DriveRightFront.setPower(-power);
         robot.DriveLeftBack.setPower(power); robot.DriveRightBack.setPower(-power);
     }
     public void moveForward (double power){
         // Left Wheels                         //Right Wheels
-        robot.DriveLeftFront.setPower(power); robot.DriveRightFront.setPower(power);
+        robot.DriveLeftFront.setPower(-power); robot.DriveRightFront.setPower(-power);
         robot.DriveLeftBack.setPower(power);  robot.DriveRightBack.setPower(power);
     }
     public void moveBackward (double power){
         // Left Wheels                         //Right Wheels
-        robot.DriveLeftFront.setPower(-power); robot.DriveRightFront.setPower(-power);
+        robot.DriveLeftFront.setPower(power); robot.DriveRightFront.setPower(power);
         robot.DriveLeftBack.setPower(-power);  robot.DriveRightBack.setPower(-power);
     }
     public void stopDriveTrainMotors (){

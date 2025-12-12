@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous (name="Team4008AutoEncoderBased", group="4008")
+@Autonomous (name="Team6976AutoEncoderBased", group="6976")
 public class Team6976AutoEncoderBased extends LinearOpMode {
 
     Team6976HM2025 robot = new Team6976HM2025();
@@ -20,7 +20,7 @@ public class Team6976AutoEncoderBased extends LinearOpMode {
         waitForStart();
 
         Time.reset();
-        driveForward(6, 0.5, 2500); //setting a time allows for the command to time out if it takes too long
+        driveForward(6, 1, 2500); //setting a time allows for the command to time out if it takes too long
     }
 
     //Converts ticks to inches
@@ -70,7 +70,6 @@ public class Team6976AutoEncoderBased extends LinearOpMode {
         robot.DriveRightFront.setTargetPosition(ticks);
         robot.DriveRightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.DriveRightFront.setPower(power);
-        sleep(sleep);
     }
 
 }

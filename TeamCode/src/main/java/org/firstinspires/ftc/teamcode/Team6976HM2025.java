@@ -9,10 +9,11 @@ public class Team6976HM2025 {
     public DcMotor DriveLeftBack = null;
     public DcMotor DriveLeftFront = null;
     public DcMotor DriveRightFront = null;
-    public Servo Meowcat1 = null;
+    public DcMotor Shooter = null;
+    public DcMotor intake = null;
 
     public double name = 0;
-public Servo Meowcat2 = null;
+
 
 
 
@@ -25,9 +26,10 @@ public Servo Meowcat2 = null;
         DriveRightFront = hwMap.get(DcMotor.class,"DriveRightFront");
         DriveLeftBack = hwMap.get(DcMotor.class,"DriveLeftBack");
         DriveRightBack = hwMap.get(DcMotor.class,"DriveRightBack");
+        Shooter = hwMap.get(DcMotor.class,"Shooter");
+        intake = hwMap.get(DcMotor.class,"intake");
         //   Lights = hwMap.get(RevBlinkinLedDriver.class,"Lights");
-        Meowcat1 = hwMap.get(Servo.class,"Meowcat1");
-        Meowcat2 = hwMap.get(Servo.class, "Meowcat2");
+
         DriveLeftFront.setDirection(DcMotor.Direction.FORWARD);
         DriveLeftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         DriveLeftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -47,6 +49,18 @@ public Servo Meowcat2 = null;
         DriveRightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         DriveRightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         DriveRightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        intake.setDirection(DcMotor.Direction.REVERSE);
+        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        Shooter.setDirection(DcMotor.Direction.REVERSE);
+        Shooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Shooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
 
 //        ColorSensor = hwMap.get(NormalizedColorSensor.class, "sensor");
     }
