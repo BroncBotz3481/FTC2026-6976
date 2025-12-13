@@ -20,8 +20,8 @@ public class Team6976AutoTimeBased extends LinearOpMode {
     }
 
     public void moveForward (double power, int time){
-        robot.DriveRightFront.setPower(-power);
-        robot.DriveLeftFront.setPower(-power);
+        robot.DriveRightFront.setPower(power);
+        robot.DriveLeftFront.setPower(power);
         robot.DriveRightBack.setPower(power);
         robot.DriveLeftBack.setPower(power);
         sleep(time);
