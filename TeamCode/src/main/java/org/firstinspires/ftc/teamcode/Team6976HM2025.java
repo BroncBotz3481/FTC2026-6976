@@ -9,10 +9,12 @@ public class Team6976HM2025 {
     public DcMotor DriveLeftBack = null;
     public DcMotor DriveLeftFront = null;
     public DcMotor DriveRightFront = null;
-    public Servo Meowcat1 = null;
+    public DcMotor shooter = null;
+    public DcMotor intake = null;
+    public DcMotor shooter2 = null;
+    public DcMotor intake2 = null;
 
-    public double name = 0;
-public Servo Meowcat2 = null;
+
 
 
 
@@ -25,9 +27,12 @@ public Servo Meowcat2 = null;
         DriveRightFront = hwMap.get(DcMotor.class,"DriveRightFront");
         DriveLeftBack = hwMap.get(DcMotor.class,"DriveLeftBack");
         DriveRightBack = hwMap.get(DcMotor.class,"DriveRightBack");
+        shooter = hwMap.get(DcMotor.class,"shooterLeft");
+        intake = hwMap.get(DcMotor.class,"intake");
+        shooter2 = hwMap.get(DcMotor.class,"shooterRight");
+        intake2 = hwMap.get(DcMotor.class,"intake2");
+
         //   Lights = hwMap.get(RevBlinkinLedDriver.class,"Lights");
-        Meowcat1 = hwMap.get(Servo.class,"Meowcat1");
-        Meowcat2 = hwMap.get(Servo.class, "Meowcat2");
         DriveLeftFront.setDirection(DcMotor.Direction.FORWARD);
         DriveLeftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         DriveLeftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -47,6 +52,26 @@ public Servo Meowcat2 = null;
         DriveRightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         DriveRightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         DriveRightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        shooter.setDirection(DcMotor.Direction.FORWARD);
+        shooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        shooter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        intake.setDirection(DcMotor.Direction.FORWARD);
+        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        shooter2.setDirection(DcMotor.Direction.FORWARD);
+        shooter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        shooter2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        shooter2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        intake2.setDirection(DcMotor.Direction.FORWARD);
+        intake2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intake2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 //        ColorSensor = hwMap.get(NormalizedColorSensor.class, "sensor");
     }
