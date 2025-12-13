@@ -11,9 +11,10 @@ public class Team6976HM2025 {
     public DcMotor DriveRightFront = null;
     public DcMotor shooter = null;
     public DcMotor intake = null;
+    public DcMotor shooter2 = null;
+    public DcMotor intake2 = null;
 
-    public double name = 0;
-public Servo Meowcat2 = null;
+
 
 
 
@@ -26,8 +27,11 @@ public Servo Meowcat2 = null;
         DriveRightFront = hwMap.get(DcMotor.class,"DriveRightFront");
         DriveLeftBack = hwMap.get(DcMotor.class,"DriveLeftBack");
         DriveRightBack = hwMap.get(DcMotor.class,"DriveRightBack");
-        shooter = hwMap.get(DcMotor.class,"shooter");
+        shooter = hwMap.get(DcMotor.class,"shooterLeft");
         intake = hwMap.get(DcMotor.class,"intake");
+        shooter2 = hwMap.get(DcMotor.class,"shooterRight");
+        intake2 = hwMap.get(DcMotor.class,"intake2");
+
         //   Lights = hwMap.get(RevBlinkinLedDriver.class,"Lights");
         DriveLeftFront.setDirection(DcMotor.Direction.FORWARD);
         DriveLeftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -58,6 +62,16 @@ public Servo Meowcat2 = null;
         intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        shooter2.setDirection(DcMotor.Direction.FORWARD);
+        shooter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        shooter2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        shooter2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        intake2.setDirection(DcMotor.Direction.FORWARD);
+        intake2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intake2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 //        ColorSensor = hwMap.get(NormalizedColorSensor.class, "sensor");
     }
