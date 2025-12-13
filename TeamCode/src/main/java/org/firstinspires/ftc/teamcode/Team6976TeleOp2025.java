@@ -83,17 +83,17 @@ public class Team6976TeleOp2025 extends LinearOpMode {
             robot.intake2.setPower(0);
 
 
-            while(gamepad2.y) {
+            if(gamepad2.y) {
                 robot.shooter.setPower(-1);
                 robot.shooter2.setPower(1);
             }
-            while(gamepad2.a) {
+            else if(gamepad2.a) {
                 robot.shooter.setPower(1);
                 robot.shooter2.setPower(-1);
+            } else{
+                robot.shooter.setPower(0);
+                robot.shooter2.setPower(0);
             }
-            robot.shooter.setPower(0);
-            robot.shooter2.setPower(0);
-
 
 
             //write your code here
