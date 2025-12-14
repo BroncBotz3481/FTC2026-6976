@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous (name="Team4008AutoTimeBased", group="4008")
+@Autonomous (name="Team6976AutoBackwards", group="4008")
 public class Team6976AutoGoBackwards extends LinearOpMode {
 
     Team6976HM2025 robot = new Team6976HM2025();
@@ -16,7 +16,7 @@ public class Team6976AutoGoBackwards extends LinearOpMode {
         sleep(3000);
         waitForStart();
 
-        moveForward(-0.3,5000); // This powers all the motors to move the robot forward for 1000 milseconds
+        moveForward(-0.3,6000); // This powers all the motors to move the robot forward for 1000 milseconds
     }
 
     public void moveForward (double power, int time){

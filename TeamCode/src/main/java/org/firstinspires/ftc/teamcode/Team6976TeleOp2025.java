@@ -70,26 +70,29 @@ public class Team6976TeleOp2025 extends LinearOpMode {
                 moveRight(mag);
             }
 
+            double intakeSpeed = gamepad2.left_bumper ? 0.3 : 1;
 
-            while (gamepad2.right_trigger > 0.3) {
-                robot.intake.setPower(-0.5);
-                robot.intake2.setPower(-0.5);
+            if (gamepad2.left_trigger > 0.3) {
+                robot.intake.setPower(-0.5 * intakeSpeed);
+                robot.intake2.setPower(-0.5 * intakeSpeed);
             }
-            while (gamepad2.left_trigger > 0.3) {
-                robot.intake.setPower(0.5);
-                robot.intake2.setPower(0.5);
-            }
+            else if (gamepad2.right_trigger > 0.3) {
+                robot.intake.setPower(0.5 * intakeSpeed);
+                robot.intake2.setPower(0.5 * intakeSpeed);
+            } else {
                 robot.intake.setPower(0);
-            robot.intake2.setPower(0);
+                robot.intake2.setPower(0);
 
-
-            if(gamepad2.y) {
-                robot.shooter.setPower(-1);
-                robot.shooter2.setPower(1);
             }
-            else if(gamepad2.a) {
+
+
+            if(gamepad2.a) {
                 robot.shooter.setPower(1);
                 robot.shooter2.setPower(-1);
+            }
+            else if(gamepad2.right_bumper) {
+                robot.shooter.setPower(0.8);
+                robot.shooter2.setPower(-0.8);
             } else{
                 robot.shooter.setPower(0);
                 robot.shooter2.setPower(0);
