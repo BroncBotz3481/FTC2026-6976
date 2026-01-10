@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -9,9 +10,9 @@ public class Team6976HM2025 {
     public DcMotor DriveLeftBack = null;
     public DcMotor DriveLeftFront = null;
     public DcMotor DriveRightFront = null;
-    public DcMotor shooter = null;
+    public DcMotorEx shooter = null;
     public DcMotor intake = null;
-    public DcMotor shooter2 = null;
+    public DcMotorEx shooter2 = null;
     public DcMotor intake2 = null;
 
 
@@ -27,9 +28,9 @@ public class Team6976HM2025 {
         DriveRightFront = hwMap.get(DcMotor.class,"DriveRightFront");
         DriveLeftBack = hwMap.get(DcMotor.class,"DriveLeftBack");
         DriveRightBack = hwMap.get(DcMotor.class,"DriveRightBack");
-        shooter = hwMap.get(DcMotor.class,"shooterLeft");
+        shooter = hwMap.get(DcMotorEx.class,"shooterLeft");
         intake = hwMap.get(DcMotor.class,"intake");
-        shooter2 = hwMap.get(DcMotor.class,"shooterRight");
+        shooter2 = hwMap.get(DcMotorEx.class,"shooterRight");
         intake2 = hwMap.get(DcMotor.class,"intake2");
 
         //   Lights = hwMap.get(RevBlinkinLedDriver.class,"Lights");

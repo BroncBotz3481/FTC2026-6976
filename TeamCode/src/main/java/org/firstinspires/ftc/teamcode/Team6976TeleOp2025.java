@@ -24,6 +24,9 @@ public class Team6976TeleOp2025 extends LinearOpMode {
         robot.DriveLeftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.DriveLeftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+        robot.shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.shooter2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         //robot.Lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.BEATS_PER_MINUTE_PARTY_PALETTE);
         waitForStart();
 
@@ -86,16 +89,31 @@ public class Team6976TeleOp2025 extends LinearOpMode {
             }
 
 
+//            if(gamepad2.a) {
+//                robot.shooter.setPower(8);
+//                robot.shooter2.setPower(-8);
+//            }
+//            else if(gamepad2.right_bumper) {
+//                robot.shooter.setPower(0.5);
+//                robot.shooter2.setPower(-0.5);
+//            } else if(gamepad2.left_bumper) {
+//                robot.shooter.setPower(0.2);
+//                robot.shooter2.setPower(-0.2);
+//            } else{
+//                robot.shooter.setPower(0);
+//                robot.shooter2.setPower(0);
+//            }
+
+
+            double wheelRadius = 0.0381; // meters
+            double desiredBallSpeed = 5.04; // m/s
+
+            double wheelSpeedRadPerSec = desiredBallSpeed / wheelRadius * 1.03; // 3% overshoot
+
+
             if(gamepad2.a) {
-                robot.shooter.setPower(1);
-                robot.shooter2.setPower(-1);
-            }
-            else if(gamepad2.right_bumper) {
-                robot.shooter.setPower(0.8);
-                robot.shooter2.setPower(-0.8);
-            } else{
-                robot.shooter.setPower(0);
-                robot.shooter2.setPower(0);
+                robot.shooter.setVelocity(wheelSpeedRadPerSec);
+                robot.shooter.setVelocity(-wheelSpeedRadPerSec);
             }
 
 
