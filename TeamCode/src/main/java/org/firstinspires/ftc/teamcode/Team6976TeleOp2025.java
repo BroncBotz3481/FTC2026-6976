@@ -9,6 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp(name = "Team6976TeleOp2026", group = "6976")
 public class Team6976TeleOp2025 extends LinearOpMode {
     Team6976HM2025 robot = new Team6976HM2025();
+    int mode = 0;
+    double[] shooterSpeeds = {0.2, 0.5, 0.75, 1};
 
     @Override
     public void runOpMode() {
@@ -89,31 +91,25 @@ public class Team6976TeleOp2025 extends LinearOpMode {
             }
 
 
-//            if(gamepad2.a) {
-//                robot.shooter.setPower(8);
-//                robot.shooter2.setPower(-8);
-//            }
-//            else if(gamepad2.right_bumper) {
-//                robot.shooter.setPower(0.5);
-//                robot.shooter2.setPower(-0.5);
-//            } else if(gamepad2.left_bumper) {
-//                robot.shooter.setPower(0.2);
-//                robot.shooter2.setPower(-0.2);
-//            } else{
-//                robot.shooter.setPower(0);
-//                robot.shooter2.setPower(0);
-//            }
-
 
             double wheelRadius = 0.0381; // meters
-            double desiredBallSpeed = 5.04; // m/s
+            double desiredBallSpeed = 0.2; //m/s
+
+            if(gamepad2.xWasPressed()){
+                desiredBallSpeed = nextMode();
+                gamepad2.rumble(500);
+            }
+             // m/s
 
             double wheelSpeedRadPerSec = desiredBallSpeed / wheelRadius * 1.03; // 3% overshoot
 
 
             if(gamepad2.a) {
                 robot.shooter.setVelocity(wheelSpeedRadPerSec);
-                robot.shooter.setVelocity(-wheelSpeedRadPerSec);
+                robot.shooter2.setVelocity(-wheelSpeedRadPerSec);
+            } else {
+                robot.shooter.setVelocity(wheelSpeedRadPerSec);
+                robot.shooter2.setVelocity(-wheelSpeedRadPerSec);
             }
 
 
@@ -148,4 +144,12 @@ public class Team6976TeleOp2025 extends LinearOpMode {
         robot.DriveRightBack.setPower(0);      robot.DriveLeftBack.setPower(0);
 
     }
+    public double nextMode() {
+        mode++;
+        if (mode > shooterSpeeds.length - 1) {
+            mode = 0;
+        }
+        return shooterSpeeds[mode];
+    }
+
 }
