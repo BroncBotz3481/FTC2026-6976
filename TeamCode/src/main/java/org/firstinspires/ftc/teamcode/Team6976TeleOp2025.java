@@ -100,6 +100,9 @@ public class Team6976TeleOp2025 extends LinearOpMode {
                     double power = PIDControl(1000, robot.shooter.getVelocity());
                     robot.shooter.setPower(power);
                     robot.shooter2.setPower(-power);
+                }else{
+                    robot.shooter.setPower(0);
+                    robot.shooter2.setPower(0);
                 }
 
             } else {
