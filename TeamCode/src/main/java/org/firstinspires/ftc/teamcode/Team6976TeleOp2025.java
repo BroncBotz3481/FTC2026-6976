@@ -3,12 +3,23 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 //AUSTIN: YOUR DEADLINE FOR THIS IS BEFORE KICKOFF
 //WE NEED YOUR CODE FOR KICKOFF DEMONSTRATION! HELP!
 @TeleOp(name = "Team6976TeleOp2026", group = "6976")
 public class Team6976TeleOp2025 extends LinearOpMode {
     Team6976HM2025 robot = new Team6976HM2025();
+
+    double intergrralSum = 0;
+    double kp = 0;
+    double ki = 0;
+    double kd = 0;
+    double kf = 0;
+    ElapsedTime timer = new ElapsedTime();
+    private double lastError = 0;
 
     @Override
     public void runOpMode() {
@@ -24,6 +35,7 @@ public class Team6976TeleOp2025 extends LinearOpMode {
         robot.DriveLeftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.DriveLeftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+        boolean isabellaTestingStuff = false;
         robot.shooter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.shooter2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -61,25 +73,61 @@ public class Team6976TeleOp2025 extends LinearOpMode {
             telemetry.addData("RightBack", robot.DriveRightBack.getCurrentPosition());
             telemetry.addData("LeftFront", robot.DriveLeftFront.getCurrentPosition());
             telemetry.addData("LeftBack", robot.DriveLeftBack.getCurrentPosition());
+            telemetry.addData("Isabella Testing stuff : ", isabellaTestingStuff);
+            telemetry.addData("Shooter Velocity in ticks: ", robot.shooter.getVelocity());
+            telemetry.addData("Shooter2 Velocity in ticks: ", robot.shooter2.getVelocity());
             telemetry.update();
 
-            if (gamepad1.dpad_up){
+            if (gamepad1.dpad_up) {
                 moveForward(mag);
-            } else if (gamepad1.dpad_down){
+            } else if (gamepad1.dpad_down) {
                 moveBackward(mag);
-            } else if (gamepad1.dpad_left){
+            } else if (gamepad1.dpad_left) {
                 moveLeft(mag);
-            } else if (gamepad1.dpad_right){
+            } else if (gamepad1.dpad_right) {
                 moveRight(mag);
             }
+
+            if (gamepad2.x && gamepad2.right_bumper){
+                isabellaTestingStuff = !isabellaTestingStuff;
+
+                telemetry.update();
+            }
+
+            if(isabellaTestingStuff){
+
+                if(gamepad2.right_trigger > 0.3){
+                    double power = PIDControl(1000, robot.shooter.getVelocity());
+                    robot.shooter.setPower(power);
+                    robot.shooter2.setPower(-power);
+                }
+
+            } else {
+
+                if(gamepad2.a) {
+                    robot.shooter.setPower(.3);
+                    robot.shooter2.setPower(-.3);
+                }
+                else if(gamepad2.right_bumper) {
+                    robot.shooter.setPower(0.1);
+                    robot.shooter2.setPower(-0.1);
+                } else if(gamepad2.left_bumper) {
+                    robot.shooter.setPower(0.5);
+                    robot.shooter2.setPower(-0.5);
+                } else{
+                    robot.shooter.setPower(0);
+                    robot.shooter2.setPower(0);
+                }
+
+            }
+
 
             double intakeSpeed = gamepad2.left_bumper ? 0.3 : 1;
 
             if (gamepad2.left_trigger > 0.3) {
                 robot.intake.setPower(-0.5 * intakeSpeed);
                 robot.intake2.setPower(-0.5 * intakeSpeed);
-            }
-            else if (gamepad2.right_trigger > 0.3) {
+            } else if (gamepad2.right_trigger > 0.3) {
                 robot.intake.setPower(0.5 * intakeSpeed);
                 robot.intake2.setPower(0.5 * intakeSpeed);
             } else {
@@ -88,21 +136,7 @@ public class Team6976TeleOp2025 extends LinearOpMode {
 
             }
 
-
-            if(gamepad2.a) {
-                robot.shooter.setPower(.3);
-                robot.shooter2.setPower(-.3);
-            }
-            else if(gamepad2.right_bumper) {
-                robot.shooter.setPower(0.1);
-                robot.shooter2.setPower(-0.1);
-            } else if(gamepad2.left_bumper) {
-                robot.shooter.setPower(0.5);
-                robot.shooter2.setPower(-0.5);
-            } else{
-                robot.shooter.setPower(0);
-                robot.shooter2.setPower(0);
-            }
+//
 
 
 //            double wheelRadius = 0.0381; // meters
@@ -122,30 +156,56 @@ public class Team6976TeleOp2025 extends LinearOpMode {
     }
 
     //Methods go here
-    public void moveLeft (double power){
+    public void moveLeft(double power) {
 
-        robot.DriveLeftFront.setPower(-power); robot.DriveRightFront.setPower(power);
-        robot.DriveLeftBack.setPower(-power);   robot.DriveRightBack.setPower(power);
+        robot.DriveLeftFront.setPower(-power);
+        robot.DriveRightFront.setPower(power);
+        robot.DriveLeftBack.setPower(-power);
+        robot.DriveRightBack.setPower(power);
     }
-    public void moveRight (double power){
-        // Left Wheels                         //Right Wheels
-        robot.DriveLeftFront.setPower(power); robot.DriveRightFront.setPower(-power);
-        robot.DriveLeftBack.setPower(power); robot.DriveRightBack.setPower(-power);
-    }
-    public void moveForward (double power){
-        // Left Wheels                         //Right Wheels
-        robot.DriveLeftFront.setPower(-power); robot.DriveRightFront.setPower(-power);
-        robot.DriveLeftBack.setPower(power);  robot.DriveRightBack.setPower(power);
-    }
-    public void moveBackward (double power){
-        // Left Wheels                         //Right Wheels
-        robot.DriveLeftFront.setPower(power); robot.DriveRightFront.setPower(power);
-        robot.DriveLeftBack.setPower(-power);  robot.DriveRightBack.setPower(-power);
-    }
-    public void stopDriveTrainMotors (){
-        // Left Wheels                         //Right Wheels
-        robot.DriveLeftFront.setPower(0);      robot.DriveRightFront.setPower(0);
-        robot.DriveRightBack.setPower(0);      robot.DriveLeftBack.setPower(0);
 
+    public void moveRight(double power) {
+        // Left Wheels                         //Right Wheels
+        robot.DriveLeftFront.setPower(power);
+        robot.DriveRightFront.setPower(-power);
+        robot.DriveLeftBack.setPower(power);
+        robot.DriveRightBack.setPower(-power);
+    }
+
+    public void moveForward(double power) {
+        // Left Wheels                         //Right Wheels
+        robot.DriveLeftFront.setPower(-power);
+        robot.DriveRightFront.setPower(-power);
+        robot.DriveLeftBack.setPower(power);
+        robot.DriveRightBack.setPower(power);
+    }
+
+    public void moveBackward(double power) {
+        // Left Wheels                         //Right Wheels
+        robot.DriveLeftFront.setPower(power);
+        robot.DriveRightFront.setPower(power);
+        robot.DriveLeftBack.setPower(-power);
+        robot.DriveRightBack.setPower(-power);
+    }
+
+    public void stopDriveTrainMotors() {
+        // Left Wheels                         //Right Wheels
+        robot.DriveLeftFront.setPower(0);
+        robot.DriveRightFront.setPower(0);
+        robot.DriveRightBack.setPower(0);
+        robot.DriveLeftBack.setPower(0);
+
+    }
+
+    public double PIDControl(double ticksPerSecondGoal, double CurrentState) {
+        double error = ticksPerSecondGoal - CurrentState;
+        intergrralSum += error * timer.seconds();
+        double derivative = (error - lastError) / timer.seconds();
+        lastError = error;
+        timer.reset();
+
+        double output = (error * kp) + (derivative * kd) + (intergrralSum * ki) + (ticksPerSecondGoal * kf);
+
+        return output;
     }
 }
