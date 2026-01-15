@@ -16,7 +16,7 @@ public class Team6976TeleOp2025 extends LinearOpMode {
     double intergrralSum = 0;
     double kp = 0;
     double ki = 0;
-    double kd = 0;
+    double kd = 2;
     double kf = 0;
     ElapsedTime timer = new ElapsedTime();
     private double lastError = 0;
